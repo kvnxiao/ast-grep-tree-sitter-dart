@@ -8,6 +8,7 @@
     "source": "node nursery.js source",
     "prepublishOnly": "node nursery.js source",
     "postinstall": "node postinstall.js",
+    "clean": "rm ./parser.*; rm ./scanner.*",
     "test": "node nursery.js test"
   },
   "files": [
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@ast-grep/nursery": "0.0.4",
+    "node-gyp": "^11.2.0",
     "tree-sitter-cli": "0.25.6",
     "tree-sitter-dart": "https://github.com/UserNobody14/tree-sitter-dart"
   },
