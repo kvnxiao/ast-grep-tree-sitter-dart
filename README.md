@@ -1,5 +1,10 @@
 # ast-grep napi language for dart
 
+Since Dart has been removed as an officially supported language in `ast-grep` ([see here](https://github.com/ast-grep/ast-grep/commit/cd25a628f07bba546b9b7f7333079de481995def)),
+This adds Dart language support for `@ast-grep/napi` using the `tree-sitter-dart` library from <https://github.com/UserNobody14/tree-sitter-dart>.
+
+Supporting Dart for `@ast-grep/napi` can be useful for codemods for the Dart and Flutter ecosystem.
+
 ## Installation
 
 In a pnpm project, run:
