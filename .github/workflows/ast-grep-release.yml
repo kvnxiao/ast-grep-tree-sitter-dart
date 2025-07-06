@@ -1,0 +1,103 @@
+# Recreated from
+# https://github.com/tree-sitter/workflows/blob/0ddf14c2d6cb042a24f9b9bd9c2912f811aac862/.github/workflows/package-npm.yml
+
+# This is a reusable and reference workflow for parsers
+name: Build package
+
+on:
+  workflow_call:
+    inputs:
+      directory:
+        description: The working directory of the package, useful for monorepos
+        default: .
+        type: string
+      dry-run:
+        description: Dry run (no publish)
+        type: boolean
+        default: false
+    secrets:
+      NODE_AUTH_TOKEN:
+        description: An authentication token for npm
+        required: true
+
+jobs:
+  prebuild:
+    name: Build NodeJS binaries on ${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Set up NodeJS
+        uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+          registry-url: https://registry.npmjs.org/
+          node-version: 24
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build x64 binary
+        run: |
+          pnpm source
+          pnpm build
+        working-directory: ${{inputs.directory}}
+      - name: Test binary
+        run: pnpm test
+        working-directory: ${{inputs.directory}}
+      - name: Upload binaries
+        uses: actions/upload-artifact@v4
+        with:
+          path: ${{inputs.directory}}/**/parser.so
+          name: prebuild-${{runner.os}}-${{runner.arch}}
+          retention-days: 2
+
+  package:
+    name: Publish NodeJS package
+    needs: [prebuild]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Set up NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org/
+      - name: Install dependencies
+        run: pnpm install
+      - name: Download binaries
+        uses: actions/download-artifact@v4
+        with:
+          path: ${{inputs.directory}}/prebuilds
+          pattern: prebuild-*
+          # merge-multiple: true
+      - name: Move sources
+        run: pnpm source
+        working-directory: ${{inputs.directory}}
+      - name: Check binaries
+        run: tree
+        working-directory: ${{inputs.directory}}
+      - name: Publish Dry Run
+        run: pnpm publish --dry-run
+        if: ${{ inputs.dry-run }}
+        working-directory: ${{inputs.directory}}
+      - name: Publish to npm
+        run: pnpm publish
+        if: ${{ !inputs.dry-run }}
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+        working-directory: ${{inputs.directory}}

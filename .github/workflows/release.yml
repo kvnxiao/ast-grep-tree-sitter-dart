@@ -14,7 +14,7 @@ on:
 
 jobs:
   npm-publish:
-    uses: ast-grep/langs/.github/workflows/release.yml@main
+    uses: ./.github/workflows/ast-grep-release.yml
     with:
       directory: ${{ inputs.directory }}
       dry-run: ${{ inputs.dry-run }}
