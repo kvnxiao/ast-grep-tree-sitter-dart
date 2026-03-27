@@ -19,8 +19,8 @@ importers:
         specifier: ^12.2.0
         version: 12.2.0
       tree-sitter-cli:
-        specifier: 0.26.7
-        version: 0.26.7
+        specifier: ~0.25.0
+        version: 0.25.10
       tree-sitter-dart:
         specifier: github:UserNobody14/tree-sitter-dart
         version: https://codeload.github.com/UserNobody14/tree-sitter-dart/tar.gz/0fc19c3a57b1109802af41d2b8f60d8835c5da3a(tree-sitter@0.21.1)
@@ -318,8 +318,8 @@ packages:
     resolution: {integrity: sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ==}
     engines: {node: '>=12.0.0'}
 
-  tree-sitter-cli@0.26.7:
-    resolution: {integrity: sha512-fOg/DokJr/gW7suy9IypT1MQon28+JxOmtjudrT04rHRyqVJzrvakrojwyU8r0U6UNRsZKilb8VIhyarv2XUkQ==}
+  tree-sitter-cli@0.25.10:
+    resolution: {integrity: sha512-KoebQguKMCIghisEOdA372TIbrUl0kdnfZ9YQIBRAeOvNSKe85XbU4LuFW7hduRUwJj0rAG7pX5wo9sZhbBF1g==}
     engines: {node: '>=12.0.0'}
     hasBin: true
 
@@ -625,7 +625,7 @@ snapshots:
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
 
-  tree-sitter-cli@0.26.7: {}
+  tree-sitter-cli@0.25.10: {}
 
   tree-sitter-dart@https://codeload.github.com/UserNobody14/tree-sitter-dart/tar.gz/0fc19c3a57b1109802af41d2b8f60d8835c5da3a(tree-sitter@0.21.1):
     dependencies:

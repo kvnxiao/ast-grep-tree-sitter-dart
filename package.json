@@ -1,6 +1,6 @@
 {
   "name": "ast-grep-tree-sitter-dart",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "ast-grep language support for Dart using UserNobody14/tree-sitter-dart for tree-sitter-dart",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "@ast-grep/setup-lang": "0.0.6"
   },
   "peerDependencies": {
-    "tree-sitter-cli": "0.25.6"
+    "tree-sitter-cli": "~0.25.0"
   },
   "peerDependenciesMeta": {
     "tree-sitter-cli": {
@@ -39,7 +39,7 @@
   "devDependencies": {
     "@ast-grep/nursery": "0.0.9",
     "node-gyp": "^12.2.0",
-    "tree-sitter-cli": "0.26.7",
+    "tree-sitter-cli": "~0.25.0",
     "tree-sitter-dart": "github:UserNobody14/tree-sitter-dart"
   },
   "publishConfig": {
