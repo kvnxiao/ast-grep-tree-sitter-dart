@@ -92,11 +92,11 @@ jobs:
         run: tree
         working-directory: ${{inputs.directory}}
       - name: Publish Dry Run
-        run: pnpm publish --dry-run
+        run: pnpm publish --dry-run --no-git-checks
         if: ${{ inputs.dry-run }}
         working-directory: ${{inputs.directory}}
       - name: Publish to npm
-        run: pnpm publish
+        run: pnpm publish --no-git-checks
         if: ${{ !inputs.dry-run }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
